@@ -1,6 +1,3 @@
-# JW_Contact_Agenda
-Java Web Agenda de Contacto - Servlet - JSP - JDBC - MySQL
-
 # JAVA Projeto 2 - Web Agenda de Contacto
 
 Projeto Java Web Servlet - JSP - JDBC - MySQL - MVC - Eclipse IDE
@@ -36,7 +33,15 @@ Iniciado: 2024-07-16
         describe contatos;
     ```
 
-
+### Criando o Projeto e as camadas MVC (Model View Controller)
+- New Dynamic Web Project > Nome: "Contact_Agenda" > Gerar "web.xml"
+- Expandir "Java Resources" > BT DT em cima de "src/mains/java" > new package > nome: "controller"
+- Repetir o processo anterior e criar o pacote "model"
+- BT DT em cima de controller > New > Servlet > nome: "Controller" > Next > Next > desmarcar o "doPost", mantendo o "doGet" > Finish.
+- BT DT em cima de model > New > Class > nome: "DAO" > Finish.
+- BT DT em cima de model > New > Class > nome: "JavaBeans" > Finish.
+- Nossa camada View:
+	- Expandir "src > main", BT DT em de "webapp" > New > HTML File > nome: index.html > escolher template do "html 5" > Finish.
 
 
   
