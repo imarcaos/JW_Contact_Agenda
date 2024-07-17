@@ -60,3 +60,38 @@ Iniciado: 2024-07-16
 	- BT DT dentro da nossa classe > Source > 
 		- > Generate Constructor using Fields
 		- > Generate Getters and Setters
+
+### Conexão com a DB MySQL
+2024-07-17
+#### Drive Connector
+- Para descarregar a library do MySQL Connector, fazemos uma pesquisa por MySQL Connector, e fazemos download do `JDBC Driver for MySQL (Connector/J)` > selecionamos "Platform Independent" > ficheiro zip (se preferir) > em baixo da página "No thanks, just start my download" > Extrair.
+- Agora importamos para dentro do nosso projeto:
+- Expandimos as pastas dentro do nosso projeto até chegar na pasta lib, conforme caminha exemplo abaixo: /nome_projeto/src/main/webapp/WEB-INF/lib
+- na pasta onde extraímos o drive connector, buscamos o jar `mysql-connector-j-version.jar`. e arrastamos (copy files) para dentro da pasta lib indicada anteriormente ou pode fazer "copy" em cima do ficheiro e "paste" em cima da pasta lib.
+#### Classe DAO - Módulo e Parâmetros de Conexão
+- Abrir a nossa classe "`DAO.java`"
+- Dentro da classe criamos 4 variáveis do tipo `String` para conexão:
+	- `driver`, `url`, `user`, `pass`.
+	- para encontrar o formato de `String` vamos ao site [Oficial do MySQL](https://dev.mysql.com/doc/) > Documentations > Rolamos a página para baixo até encontrar "Connector/J" e entrar > Clicamos em "Connector/J Examples" > Clicamos na primeira opção Example 7.1, “Connector/J: Obtaining a connection from the DriverManager” (poderá ser outra versão).
+	- Copiamos a String Driver `com.mysql.cj.jdbc.Driver` para a nossa variável `driver` 
+	- Copiamos a String Connection `jdbc:mysql://localhost/test` para a nossa variável `url`, onde está "teste" será o nome da nossa DB `contact_javap1`.
+	- Variáveis `user` e `pass` conforme utilizamos em nosso servidor MySQL.
+- Criamos o método para efetuar a ligação e um para teste.
+``` java
+// teste de conexão
+	public void testeConexao() {
+		try {
+			Connection con = conexao();
+			System.out.println("Conectado " + con);
+			con.close();
+			System.out.println("Fechada " + con);
+		} catch (Exception e) {
+			System.out.println("Erro Teste de Conexão: " + e);
+		}
+	}
+```
+- Na Classe "Controller" chamamos o método para teste da classe "DAO".
+	- fazemos o import da classe "DAO": `import model.DAO;`
+	- dentro do método da classe "Controller" criamos um objeto "DAO" para ter acesso ao método teste: `DAO dao = new DAO();`
+	- dentro do método "`doGET`" chamamos o método teste da classe "DAO": `dao.testeConexao();`.
+- Teste sem erros a primeira.
