@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="pt-PT">
 <head>
@@ -7,8 +9,7 @@
 <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 </head>
 <body>
-	<img src="assets/images/agenda-3d-illustration.png">
-	<h1>Agenda de Contatos</h1>
-	<a href="main" class="btnAcessar">Acessar</a>
+<h1>Agenda de Contatos</h1>
+<a class="btnAcessar" href="">Novo Contato</a>
 </body>
 </html>

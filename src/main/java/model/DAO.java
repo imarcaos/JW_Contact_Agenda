@@ -27,17 +27,6 @@ public class DAO {
 			return null;
 		}
 	}
-	
-	// teste de conexão
-	public void testeConexao() {
-		try {
-			Connection con = conexao();
-			System.out.println("Conectado " + con);
-			con.close();
-			System.out.println("Fechada " + con);
-		} catch (Exception e) {
-			System.out.println("Erro Teste de Conexão: " + e);
-		}
-	}
+		
 
 }

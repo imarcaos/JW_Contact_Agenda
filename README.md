@@ -63,11 +63,13 @@ Iniciado: 2024-07-16
 
 ### Conexão com a DB MySQL
 2024-07-17
+
 #### Drive Connector
 - Para descarregar a library do MySQL Connector, fazemos uma pesquisa por MySQL Connector, e fazemos download do `JDBC Driver for MySQL (Connector/J)` > selecionamos "Platform Independent" > ficheiro zip (se preferir) > em baixo da página "No thanks, just start my download" > Extrair.
 - Agora importamos para dentro do nosso projeto:
 - Expandimos as pastas dentro do nosso projeto até chegar na pasta lib, conforme caminha exemplo abaixo: /nome_projeto/src/main/webapp/WEB-INF/lib
 - na pasta onde extraímos o drive connector, buscamos o jar `mysql-connector-j-version.jar`. e arrastamos (copy files) para dentro da pasta lib indicada anteriormente ou pode fazer "copy" em cima do ficheiro e "paste" em cima da pasta lib.
+
 #### Classe DAO - Módulo e Parâmetros de Conexão
 - Abrir a nossa classe "`DAO.java`"
 - Dentro da classe criamos 4 variáveis do tipo `String` para conexão:
@@ -95,3 +97,8 @@ Iniciado: 2024-07-16
 	- dentro do método da classe "Controller" criamos um objeto "DAO" para ter acesso ao método teste: `DAO dao = new DAO();`
 	- dentro do método "`doGET`" chamamos o método teste da classe "DAO": `dao.testeConexao();`.
 - Teste sem erros a primeira.
+
+### Configurando a Camada Controller no Servlet
+2024-07-18
+- Com o BT DT do rato em cima da pasta "webapp" > New > JSP File > nome: `agenda.jsp`.
+- Configurado na Servlet "Controller" as rotas para a `agenda.jsp`.
