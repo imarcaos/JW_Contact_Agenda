@@ -102,3 +102,22 @@ Iniciado: 2024-07-16
 2024-07-18
 - Com o BT DT do rato em cima da pasta "webapp" > New > JSP File > nome: `agenda.jsp`.
 - Configurado na Servlet "Controller" as rotas para a `agenda.jsp`.
+
+### Adicionar Contato e Validação do Formulário
+2024-07-18
+- Passos para Inserir novo Contato:
+	1. `agenda.jsp` ao clicar em "Adicionar Contato" > `novo.html` que irá conter o formulário.
+	2. `novo.html` > redireciona para um documento `validar.js` para validar o formulário.
+	3. `validar.js` > depois de validar, retorna ao `novo.html`
+	4. `novo.html` > após validar os dados seguem para a camada "controller" `Controller.java`
+	5. `Controller.java` > dados são encaminhados para a camada "model" `JavaBeans.java`
+	6. `Controller.java` > invoca o método inserir na camada "model" `DAO.java`
+	7. `DAO.java` > requisita os dados no model `JavaBeans.java`
+	8. `JavaBeans.java` > retorna os dados para o model `DAO.java`
+	9. `DAO.java` > executa a inserção dos dados no BD.
+	10. `Controller.java` > após a inserção redireciona para a "view" `agenda.jsp`
+
+- Criar a página `novo.html` > BT DT em cima da pasta "webapp" > New > HTML File > nome: "novo.html".
+- Criar uma nova pasta "js" dentro da pasta "assets"  e adicionar um novo ficheiro `validar.js`
+	- Em cima da pasta "js" > BT DT > New > JavaScript File
+- 

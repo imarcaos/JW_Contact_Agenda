@@ -21,12 +21,27 @@ img {
 	max-width: 400px;
 }
 
-.btnAcessar {
+.btn1 {
 	text-decoration: none;
 	background-color: #66bbff;
 	padding: 5px 10px 5px 10px;
 	color: #fff;
 	font-size: 1.2em;
 	font-weight: 600;
-	border-radius: 10px;
+	border: 0;
+	border-radius: 5px;
+	cursor: pointer;
 }
+
+.cx1 {
+	width: 320px;
+	padding: 5px;
+	margin-bottom: 10px;
+	border:  1px solid #66bbff;
+	border-radius: 5px;
+}
+
+
+
+
+
