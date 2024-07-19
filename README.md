@@ -48,9 +48,13 @@ Iniciado: 2024-07-16
 - Dentro da pasta "webapp" criei uma pasta "assets" que terá todos os ficheiros do site.
 - Criar as pastas images e css dentro de assets.
 - Adicionei ao index uma imagem a representar a agenda e um ícone favicon.
-- Foi criado um botão "Entrar" com um link a apontar para o "main", que irei criar a rota no servlet.
-- Adicionar a seguinte annotation antes da "Class Controller"
-	- `@WebServlet("/main")`
+- Foi criado um botão "Acessar" com um link para "main", que irei criar a rota no servlet.
+- Ao adicionar a rota na annotation "@WebServlet" ocorreu um erro em que ele não reconhece as strings internas, despendi muitas horas a procura de uma solução e nada, acredito que por não ter conhecimento sufiente até o momento, mas hei de lá chegar. 
+	- Pela aula que estou a seguir, o professor adicionou duas rotas dentro da  `urlPatterns`, motivo de todos os erros que tive, só é possível apontar para uma rota (era o erro que o servidor apontava), obviamente ainda preciso de mais estudos para certificar estes dados.
+	- Na aula era dito para adicionar a seguinte annotation antes da "Class Controller"
+		- `@WebServlet(urlPatterns ["/Controller", "/main"])`
+	- Solucionei deixando apenas desta forma:
+		- `@WebServlet("/main")`
 
 ### Camada Model (MVC)
 2024-07-17
@@ -102,6 +106,7 @@ Iniciado: 2024-07-16
 2024-07-18
 - Com o BT DT do rato em cima da pasta "webapp" > New > JSP File > nome: `agenda.jsp`.
 - Configurado na Servlet "Controller" as rotas para a `agenda.jsp`.
+
 
 ### Adicionar Contato e Validação do Formulário
 2024-07-18
