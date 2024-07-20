@@ -15,7 +15,8 @@ Iniciado: 2024-07-16
 
 ### Ferramentas que vou Utilizar:
 - JDK 21 LTS
-- IDE Eclipse 2024-06
+- ~~IDE Eclipse 2024-06~~
+- IDE Netbeans 18
 - Tomcat Servidor Web 10.1
 - MySQL Base de Dados (MariaDB 10.4.32)
 - Dbeaver SGBD
@@ -46,6 +47,98 @@ Iniciado: 2024-07-16
 2024-07-16
 - No antigo tínhamos o "src" onde ficavam os servlets e as classe java, agora ficam em "src/main/java"
 - Os ficheiros do site ficavam em "WebContent", agora ficam: "Web App Libraries/Main/webapp".
+
+
+## **Projeto convertido para ser desenvolvido no Netbeans**
+2024-07-20
+- O projeto que descrito a partir daqui com ponto `número.1` a partir do `3.1` denota ser desenvolvido no Netbeans.
+- O projeto antigo que foi iniciado no Eclipse (como erros), está com a numeração a partir do `3`, no fim do Readme.
+
+### 3.1 - Configuração do Tomcat no Netbeans
+- - Instalar o Tomcat, pesquisar por Tomcat e no [site oficial](https://tomcat.apache.org/), fazer download da versão que vamos utilizar no formato zip, descompactar e colar na pasta que deseja utilizar, ex: `c:\`
+- Menu Principal > Tools > Servers >
+	1. Add Server...
+	2. Selecionar "Apache Tomcat or TomEE" > Next >
+	3. Server Locations (navegar até a pasta da instalação do Tomcat) selecionar a pasta do Tomcat
+		- exemplo no Windows: `c:\Tomcat 10.1`
+		- colocar as credenciais configuradas no Tomcat
+			- User: `admin` e Password `admin` (Pode ser qualquer credencial)
+	4. Finish.
+### 4.1 - Criando o Projeto e as camadas MVC (Model View Controller)  no Netbeans
+2024-07-20
+Obs. Como venho com o projeto a 50% feito no Eclipse, tentei fazer o import do projeto dentro do Netbeans, mas não carregou quase nada, teria de fazer manualmente, optei por criar do zero, obviamente vou reaproveitando o código que já escrevi no Eclipse.
+
+#### Criando o Projeto Java Web / Servidor Tomcat
+- File > New Project > Java with Ant > Java Web > Web Application > Nome: "Contact_Agenda" > Next > Verificar se o Servidor Tomcat esta selecionado > Next > Nesta momento não selecionamos nenhuma framework > Finish.
+- A estrutura das pastas no [[NetBeans]] são:
+	- Web Pages (Views)
+	- Source Packages (Controllers e Models)
+
+#### Criando as Camadas MVC
+- Expandir a pasta do projeto > BT DT em cima de "Source Packages" > New > Java Packages... > Package Name: "controller"
+- Repetir o processo anterior e criar o pacote "model"
+- BT DT em cima do Package "controller" > New > Servlet > nome: "Controller" > Next > Finish.
+	- Mais abaixo pode expandir os métodos "HttpServelet Methods" para ver o método "doGet" e "doPost", o método "doPost" pode ser apagado, pois não o vamos utilizar.
+- BT DT em cima de model > New > Java Class > Class Name: "DAO" > Finish.
+- BT DT em cima de model > New > Java Class > Class Name: "JavaBeans" > Finish.
+- Nossa camada View:
+	- O NetBeans por padrão já cria o `index.html`, caso não tenha, criar:
+	- BT DT em de "Web Pages" > New > HTML... > HTML File Name: index.html > Finish.
+- Testar o Projeto para ver se esta tudo "OK" até este ponto.
+	- Escolher o Browser e dar "Play" botão verde.
+	- Aconteceu um erro, em que aparecia esta mensagem na hora do deploy: `FAIL - Application already exists at path [/Contact_Agenda]`, tentei apagar a pasta temporária do Windows para limpar o conflito e nada.
+	- Fechei o NetBeans e abri-o novamente (Restart), o projeto correu perfeitamente a seguir.
+
+### 5.1 - Configurando o Servlet e estilo página Index
+2024-07-20
+
+#### Criando a pastas, ficheiros e algumas configurações
+- Criar pastas para receber os ficheiros de configurações:
+	1. BT DT em "Web Pages" > New Folder... > Folder Name: 
+		- assets
+	2. Dentro da pasta assets, repetir o processo "1" para as três pastas a seguir:
+		- css
+		- js
+		- images
+- Escolha uma imagem para representar sua "Agenda de Contatos" e um ícone "favicon" para seu site e copie (arraste) para dentro da pasta "images".
+- Criar um ficheiro "style.css" que irá receber as configurações (aproveitei o criado anteriormente, só arrastei para a pasta):
+	- BT DT em cima da pasta "css" > New > Other > Web > Cascading Style Sheet
+	- ver configurações no ficheiro.
+- Foi adicionado algumas configurações no HTML (ver ficheiro) e criado um botão "Acessar" com um link para "main", que irei criar a rota no servlet. **Ter atenção neste ponto, para evitar erros.**
+
+#### Configurando o Servlet
+- Na linha onde está o `@WebServlet`, está assim:
+	- `@WebServlet(name = "Controller", urlPatterns = {"/Controller"})`
+	- Vamos agora adicionar uma nova rota para o `main` dentro do `urlPatterns`:
+		- NOTA: essa parte começou os conflitos no Eclipse
+	- `@WebServlet(name = "Controller", urlPatterns = {"/Controller", "/main"})`
+- Testar para ver está tudo "OK"
+	- Correu Perfeitamente aqui
+	- Não sabem a felicidade que sinto, já ando a muitas horas (dias) a tentar por isso a trabalhar. Estou a refazer este projeto em menos de 1 hora no [[NetBeans]] e está a correr tudo sem stress até o momento.
+
+### 6.1 - Camada Model (MVC)
+2024-07-20
+- Agora vamos editar o nosso ficheiro `JavaBeans.java` e começar a encapsular, criando as variáveis com os nomes dos campos da nossa tabela do tipo String e private:
+	- `idcon, nome, telefone e email`.
+- Criamos os Construtores,  Getters e Setters.
+	- BT DT dentro da nossa classe > Source > 
+		- > Generate Constructor using Fields
+		- > Generate Getters and Setters
+
+
+
+
+
+
+
+
+
+
+
+## **Projeto antigo iniciado com o Eclipse a partir daqui**
+2024-07-20
+- Este projeto no Eclipse está com erros no annotation `@WebServlet`, no ponto 10
+- Fica a descrição dos passo no Eclipse para uma eventual consulta, converti o projeto para trabalhos com o Netbeans.
 
 ### 3 - Configuração do Tomcat no Eclipse
 - Instalar o Tomcat, pesquisar por Tomcat e no [site oficial](https://tomcat.apache.org/), fazer download da versão que vamos utilizar no formato zip, descompactar e colar na pasta que deseja utilizar, ex: `c:/`
