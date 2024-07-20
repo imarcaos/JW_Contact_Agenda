@@ -14,6 +14,9 @@ Iniciado: 2024-07-16
 - MySQL Base de Dados (MariaDB 10.4.32)
 - Dbeaver SGBD
 
+### Abreviaturas:
+- BT DT (Botão Direito do Rato/Mouse)
+
 ### 1 - Criando a BD no MySQL
 - Adicionar uma nova folha de SQL Queries e aplicar os comandos a seguir:
     ``` sql
