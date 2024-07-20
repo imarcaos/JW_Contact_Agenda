@@ -14,7 +14,7 @@ Iniciado: 2024-07-16
 - MySQL Base de Dados (MariaDB 10.4.32)
 - Dbeaver SGBD
 
-### Criando a BD no MySQL
+### 1 - Criando a BD no MySQL
 - Adicionar uma nova folha de SQL Queries e aplicar os comandos a seguir:
     ``` sql
         create database dbagenda; 
@@ -33,7 +33,23 @@ Iniciado: 2024-07-16
         describe contatos;
     ```
 
-### Criando o Projeto e as camadas MVC (Model View Controller)
+### 2 - Atualização da Estrutura depois do Eclipse 2021-03
+2024-07-16
+- No antigo tínhamos o "src" onde ficavam os servlets e as classe java, agora ficam em "src/main/java"
+- Os ficheiros do site ficavam em "WebContent", agora ficam: "Web App Libraries/Main/webapp".
+
+### 3 - Configuração do Tomcat no Eclipse
+- Instalar o Tomcat, pesquisar por Tomcat e no [site oficial](https://tomcat.apache.org/), fazer download da versão que vamos utilizar no formato zip, descompactar e colar na pasta que deseja utilizar, ex: `c:/`
+- **Sempre que mudarmos de Workspace temos de configurar novamente o Tomcat para aquele Workspace.**
+- No Eclipse, na parte inferior direita, próximo ao terminal:	
+	1. Clicar em Server...
+	2. Embaixo aparece um link "No servers are available" > clicar aqui.
+	3. Escolhemos "Apache" > A versão do nosso Tomcat instalado `10.1` no meu caso > Next
+	4. clica em "Browse" e navega até a pasta do Tomcat e seleciona a pasta do Tomcat "c:/qualquer_coisa/apache-tomcat-10.1.25" 
+	5. Em "JRE" selecionamos o nosso "JDK"
+	6. Finish
+
+### 4 - Criando o Projeto e as camadas MVC (Model View Controller)
 - New Dynamic Web Project > Nome: "Contact_Agenda" > Gerar "web.xml"
 - Expandir "Java Resources" > BT DT em cima de "src/mains/java" > new package > nome: "controller"
 - Repetir o processo anterior e criar o pacote "model"
@@ -43,7 +59,7 @@ Iniciado: 2024-07-16
 - Nossa camada View:
 	- Expandir "src > main", BT DT em de "webapp" > New > HTML File > nome: index.html > escolher template do "html 5" > Finish.
 
-### Configurando o Servlet e estilo página Index
+### 5 - Configurando o Servlet e estilo página Index
 2024-07-16
 - Dentro da pasta "webapp" criei uma pasta "assets" que terá todos os ficheiros do site.
 - Criar as pastas images e css dentro de assets.
@@ -56,7 +72,7 @@ Iniciado: 2024-07-16
 	- Solucionei deixando apenas desta forma:
 		- `@WebServlet("/main")`
 
-### Camada Model (MVC)
+### 6 - Camada Model (MVC)
 2024-07-17
 - Agora vamos editar o nosso ficheiro `JavaBeans.java` e começar a encapsular, criando as variáveis com os nomes dos campos da nossa tabela do tipo String e private:
 	- `idcon, nome, telefone e email`.
@@ -65,7 +81,7 @@ Iniciado: 2024-07-16
 		- > Generate Constructor using Fields
 		- > Generate Getters and Setters
 
-### Conexão com a DB MySQL
+### 7 - Conexão com a DB MySQL
 2024-07-17
 
 #### Drive Connector
@@ -102,13 +118,13 @@ Iniciado: 2024-07-16
 	- dentro do método "`doGET`" chamamos o método teste da classe "DAO": `dao.testeConexao();`.
 - Teste sem erros a primeira.
 
-### Configurando a Camada Controller no Servlet
+### 8 - Configurando a Camada Controller no Servlet
 2024-07-18
 - Com o BT DT do rato em cima da pasta "webapp" > New > JSP File > nome: `agenda.jsp`.
 - Configurado na Servlet "Controller" as rotas para a `agenda.jsp`.
 
 
-### Adicionar Contato e Validação do Formulário
+### 9 - Adicionar Contato e Validação do Formulário
 2024-07-18
 - Passos para Inserir novo Contato:
 	1. `agenda.jsp` ao clicar em "Adicionar Contato" > `novo.html` que irá conter o formulário.
@@ -125,4 +141,9 @@ Iniciado: 2024-07-16
 - Criar a página `novo.html` > BT DT em cima da pasta "webapp" > New > HTML File > nome: "novo.html".
 - Criar uma nova pasta "js" dentro da pasta "assets"  e adicionar um novo ficheiro `validar.js`
 	- Em cima da pasta "js" > BT DT > New > JavaScript File
-- 
+
+### 10 - Controller - Ação Insert no doGet
+- Dentro da página `novo.html` no nosso formulário, adicionamos a action `insert`.
+- Vamos adicionar mais uma rota dentro do nosso "Controller" no  `urlPatterns` a rota `/insert`.
+- Ao adicionar a nova rota no annotation `@WebServlet`, voltou o conflito novamente descrito anteriormente, já tentei por mais algumas horas resolver e nada, de certeza que é algo que desconheço no Eclipse.
+- Já estava com sentido de fazer este projeto no NetBeans e esta é a chamada final kkk, vou testar para ver se corre melhor, preciso estudar mais coisas, não posso perder demasiado tempo aqui.
