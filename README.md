@@ -158,7 +158,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 ```
 
-- Agora criamos o Método  `Connetion conectar()` responsável pela conexão com a BD.
+- Agora criamos o Método  `Connection conectar()` responsável pela conexão com a BD.
 
 - Vou Criar o Método temporário `testeConexao()` para efetuar a ligação e teste.
 ``` java
@@ -178,9 +178,14 @@ import java.sql.SQLException;
 	- fazemos o import da classe "DAO": `import model.DAO;`
 	- dentro do método da classe "Controller" criamos um objeto "DAO" para ter acesso ao método teste: `DAO dao = new DAO();`
 	- dentro do método "`doGET`" chamamos o método teste da classe "DAO": `dao.testeConexao();`.
-- Atenção: o Netbeans para apresentar o teste, precisa de ter instalado o `Cygwin` (terminal).
+- Atenção: o Netbeans para apresentar o teste, pode ser visto em output "Apache Tomcat  or TomEE".
 - Teste sem erros a primeira.
 
+### 8.1 - Configurando a Camada Controller no Servlet
+2024-07-20
+- Com o BT DT do rato em cima da pasta "Web Pages" > New > JSP > File Name: `agenda.jsp`.
+- Adicionado o botão "Novo Contato" na `agenda.jsp` e estilos.
+- Configurado na Servlet "Controller" teste e impressão da rota `/main`.
 
 
 
@@ -192,7 +197,8 @@ import java.sql.SQLException;
 
 
 
-## **Projeto antigo iniciado com o Eclipse a partir daqui**
+
+## **Projeto antigo iniciado com o Eclipse**
 2024-07-20
 - Este projeto no Eclipse está com erros no annotation `@WebServlet`, no ponto 10
 - Fica a descrição dos passo no Eclipse para uma eventual consulta, converti o projeto para trabalhos com o Netbeans.
