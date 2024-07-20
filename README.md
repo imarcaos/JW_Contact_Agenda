@@ -43,6 +43,7 @@ Iniciado: 2024-07-16
         describe contatos;
     ```
 
+
 ### 2 - Atualização da Estrutura depois do Eclipse 2021-03
 2024-07-16
 - No antigo tínhamos o "src" onde ficavam os servlets e as classe java, agora ficam em "src/main/java"
@@ -54,6 +55,7 @@ Iniciado: 2024-07-16
 - O projeto que descrito a partir daqui com ponto `número.1` a partir do `3.1` denota ser desenvolvido no Netbeans.
 - O projeto antigo que foi iniciado no Eclipse (como erros), está com a numeração a partir do `3`, no fim do Readme.
 
+
 ### 3.1 - Configuração do Tomcat no Netbeans
 - - Instalar o Tomcat, pesquisar por Tomcat e no [site oficial](https://tomcat.apache.org/), fazer download da versão que vamos utilizar no formato zip, descompactar e colar na pasta que deseja utilizar, ex: `c:\`
 - Menu Principal > Tools > Servers >
@@ -64,6 +66,8 @@ Iniciado: 2024-07-16
 		- colocar as credenciais configuradas no Tomcat
 			- User: `admin` e Password `admin` (Pode ser qualquer credencial)
 	4. Finish.
+
+
 ### 4.1 - Criando o Projeto e as camadas MVC (Model View Controller)  no Netbeans
 2024-07-20
 Obs. Como venho com o projeto a 50% feito no Eclipse, tentei fazer o import do projeto dentro do Netbeans, mas não carregou quase nada, teria de fazer manualmente, optei por criar do zero, obviamente vou reaproveitando o código que já escrevi no Eclipse.
@@ -88,6 +92,7 @@ Obs. Como venho com o projeto a 50% feito no Eclipse, tentei fazer o import do p
 	- Escolher o Browser e dar "Play" botão verde.
 	- Aconteceu um erro, em que aparecia esta mensagem na hora do deploy: `FAIL - Application already exists at path [/Contact_Agenda]`, tentei apagar a pasta temporária do Windows para limpar o conflito e nada.
 	- Fechei o NetBeans e abri-o novamente (Restart), o projeto correu perfeitamente a seguir.
+
 
 ### 5.1 - Configurando o Servlet e estilo página Index
 2024-07-20
@@ -116,14 +121,66 @@ Obs. Como venho com o projeto a 50% feito no Eclipse, tentei fazer o import do p
 	- Correu Perfeitamente aqui
 	- Não sabem a felicidade que sinto, já ando a muitas horas (dias) a tentar por isso a trabalhar. Estou a refazer este projeto em menos de 1 hora no [[NetBeans]] e está a correr tudo sem stress até o momento.
 
+
 ### 6.1 - Camada Model (MVC)
 2024-07-20
+#### Criando o Construtor, Getters e Setters
 - Agora vamos editar o nosso ficheiro `JavaBeans.java` e começar a encapsular, criando as variáveis com os nomes dos campos da nossa tabela do tipo String e private:
 	- `idcon, nome, telefone e email`.
 - Criamos os Construtores,  Getters e Setters.
-	- BT DT dentro da nossa classe > Source > 
-		- > Generate Constructor using Fields
-		- > Generate Getters and Setters
+	- BT DT dentro da nossa classe (onde queremos inserir o código) > Insert Code... > 
+		- Inserir a seguir as variáveis: 
+			- > Constructor > Não Selecionar nada > Generate 
+		- Inserir a seguir ao Construtor vazio: 
+			- > Constructor > Selecionar todas as variáveis > Generate
+		- Inserir a seguir aos Construtores:
+		- > Getter and Setter... >  Selecionar todas as variáveis > Generate
+
+
+### 7.1 - Conexão com a DB MySQL
+2024-07-20
+#### Drive Connector
+- Para descarregar a library do MySQL Connector, fazemos uma pesquisa por MySQL Connector, e fazemos download do `JDBC Driver for MySQL (Connector/J)` > selecionamos "Platform Independent" > ficheiro zip (se preferir) > em baixo da página "No thanks, just start my download" > Extrair.
+- Agora importamos para dentro do nosso projeto:
+- BT DT na pasta libraries (`Nome_Projeto > libraries`) > Add Jar/Folder > caminho onde extraíste o connector (na pasta onde extraímos o drive connector, buscamos o jar `mysql-connector-j-version.jar`) > Open (o ficheiro já deve aparecer na librarie)
+#### Classe DAO - Módulo e Parâmetros de Conexão
+- Abrir a nossa classe "`DAO.java`"
+- Dentro da classe criamos 4 variáveis do tipo `String` para conexão:
+	- `driver`, `url`, `user`, `pass`.
+	- para encontrar o formato de `String` vamos ao site [Oficial do MySQL](https://dev.mysql.com/doc/) > Documentations > Rolamos a página para baixo até encontrar "Connector/J" e entrar > Clicamos em "Connector/J Examples" > Clicamos na primeira opção Example 7.1, “Connector/J: Obtaining a connection from the DriverManager” (poderá ser outra versão).
+	- Copiamos a String Driver `com.mysql.cj.jdbc.Driver` para a nossa variável `driver` 
+	- Copiamos a String Connection `jdbc:mysql://localhost/test` para a nossa variável `url`, onde está "teste" será o nome da nossa DB `contact_javap1`.
+	- Variáveis `user` e `pass` conforme utilizamos em nosso servidor MySQL.
+	- O meu Netbeans, não carregou os imports automáticos, são estes:
+``` java
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+```
+
+- Agora criamos o Método  `Connetion conectar()` responsável pela conexão com a BD.
+
+- Vou Criar o Método temporário `testeConexao()` para efetuar a ligação e teste.
+``` java
+// teste de conexão
+	public void testeConexao() {
+		try {
+			Connection con = conexao();
+			System.out.println("Conectado " + con);
+			con.close();
+			System.out.println("Fechada " + con);
+		} catch (Exception e) {
+			System.out.println("Erro Teste de Conexão: " + e);
+		}
+	}
+```
+- Na Classe "Controller" chamamos o método para teste da classe "DAO".
+	- fazemos o import da classe "DAO": `import model.DAO;`
+	- dentro do método da classe "Controller" criamos um objeto "DAO" para ter acesso ao método teste: `DAO dao = new DAO();`
+	- dentro do método "`doGET`" chamamos o método teste da classe "DAO": `dao.testeConexao();`.
+- Atenção: o Netbeans para apresentar o teste, precisa de ter instalado o `Cygwin` (terminal).
+- Teste sem erros a primeira.
+
 
 
 
@@ -141,6 +198,7 @@ Obs. Como venho com o projeto a 50% feito no Eclipse, tentei fazer o import do p
 - Fica a descrição dos passo no Eclipse para uma eventual consulta, converti o projeto para trabalhos com o Netbeans.
 
 ### 3 - Configuração do Tomcat no Eclipse
+2024-07-16
 - Instalar o Tomcat, pesquisar por Tomcat e no [site oficial](https://tomcat.apache.org/), fazer download da versão que vamos utilizar no formato zip, descompactar e colar na pasta que deseja utilizar, ex: `c:/`
 - **Sempre que mudarmos de Workspace temos de configurar novamente o Tomcat para aquele Workspace.**
 - No Eclipse, na parte inferior direita, próximo ao terminal:	
@@ -152,6 +210,7 @@ Obs. Como venho com o projeto a 50% feito no Eclipse, tentei fazer o import do p
 	6. Finish
 
 ### 4 - Criando o Projeto e as camadas MVC (Model View Controller)
+2024-07-16
 - New Dynamic Web Project > Nome: "Contact_Agenda" > Gerar "web.xml"
 - Expandir "Java Resources" > BT DT em cima de "src/mains/java" > new package > nome: "controller"
 - Repetir o processo anterior e criar o pacote "model"
