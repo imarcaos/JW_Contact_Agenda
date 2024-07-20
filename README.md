@@ -7,6 +7,12 @@ Projeto Java Web Servlet - JSP - JDBC - MySQL - MVC - Eclipse IDE
 ## Projeto 2 - Java Web - Agenda de Contacto
 Iniciado: 2024-07-16
 
+### Logs
+- 2024-07-20 - Criado uma nova "branch eclipse_proj", o projeto feito no Eclipse, estará armazenado nesta "branch".
+- 2024-07-20 - Vou tentar converter o projeto do Eclipse para o Netbeans ( Ponto 3 Eclipse -> ponto 3.1 NetBeans)
+- 2024-07-20 - Cheio de Erros com o Eclipse que não consigo resolver `@WebServlet`, acredito ser por não estar a seguir o projeto original com JDK 11 e Tomcat9.
+- 2024-07-16 - Início do Projeto
+
 ### Ferramentas que vou Utilizar:
 - JDK 21 LTS
 - IDE Eclipse 2024-06
