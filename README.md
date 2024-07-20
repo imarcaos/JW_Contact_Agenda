@@ -181,12 +181,40 @@ import java.sql.SQLException;
 - Atenção: o Netbeans para apresentar o teste, pode ser visto em output "Apache Tomcat  or TomEE".
 - Teste sem erros a primeira.
 
+
 ### 8.1 - Configurando a Camada Controller no Servlet
 2024-07-20
 - Com o BT DT do rato em cima da pasta "Web Pages" > New > JSP > File Name: `agenda.jsp`.
 - Adicionado o botão "Novo Contato" na `agenda.jsp` e estilos.
 - Configurado na Servlet "Controller" teste e impressão da rota `/main`.
 
+
+### 9.1 - Adicionar Contato e Validação do Formulário
+2024-07-20
+
+- Passos para Inserir novo Contato:
+	1. `agenda.jsp` ao clicar em "Adicionar Contato" > `novo.html` que irá conter o formulário.
+	2. `novo.html` > redireciona para um documento `validar.js` para validar o formulário.
+	3. `validar.js` > depois de validar, retorna ao `novo.html`
+	4. `novo.html` > após validar os dados seguem para a camada "controller" `Controller.java`
+	5. `Controller.java` > dados são encaminhados para a camada "model" `JavaBeans.java`
+	6. `Controller.java` > invoca o método inserir na camada "model" `DAO.java`
+	7. `DAO.java` > requisita os dados no model `JavaBeans.java`
+	8. `JavaBeans.java` > retorna os dados para o model `DAO.java`
+	9. `DAO.java` > executa a inserção dos dados no BD.
+	10. `Controller.java` > após a inserção redireciona para a "view" `agenda.jsp`
+
+- Criar a página `novo.html` > BT DT em cima da pasta "Web Pages" > New > HTML... > HTML File Name: "novo.html".
+- Dentro da página `novo.html` criamos um formulário para receber os dados ao criar um Novo Contato.
+- Na página `agenda.jsp` adicionar a ligação dentro do botão "Criar Novo Contato", apontando para a página `novo.html`.
+- Fazer o estilo do formulário no nosso ficheiro "style.css"
+- Na pasta "js" dentro da pasta "assets", adicionar um novo ficheiro com o nome: `validar.js`
+	- Em cima da pasta "js" > BT DT > New > JavaScript File
+	- Criar um script com uma função simples `validar()` para validar os campos se estão preenchidos.
+- Adicionar o script antes do fecho da tag `</body>` e chamar a função `onclick="validar()"` dentro do botão `adicionar`.
+- Nota: podemos utilizar o JQuery para fazer validações mais avançadas.
+- Teste "OK" até aqui.
+- ponto 3
 
 
 

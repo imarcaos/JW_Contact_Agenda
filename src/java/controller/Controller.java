@@ -15,12 +15,13 @@ import model.DAO;
  */
 @WebServlet(name = "Controller", urlPatterns = {"/Controller", "/main"})
 public class Controller extends HttpServlet {
+
     DAO dao = new DAO();
-    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+
     }
 
     @Override
@@ -28,10 +29,18 @@ public class Controller extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
         String action = request.getServletPath();
-        System.out.println(action);
-        
+        if (action.equals("/main")) {
+            contatos(request, response);
+        }
+
 //        // teste de conexão
 //        dao.testeConexao();
+    }
+
+    // Listar Contatos
+    protected void contatos(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.sendRedirect("agenda.jsp");
     }
 
     @Override
