@@ -52,8 +52,8 @@ Iniciado: 2024-07-16
 
 ## **Projeto convertido para ser desenvolvido no Netbeans**
 2024-07-20
-- O projeto que descrito a partir daqui com ponto `número.1` a partir do `3.1` denota ser desenvolvido no Netbeans.
-- O projeto antigo que foi iniciado no Eclipse (como erros), está com a numeração a partir do `3`, no fim do Readme.
+- O projeto foi reestruturado para o Netbeans a partir do ponto 3 e os pontos para o Netbeans renomeados para `número.1`, que inicia a partir do `3.1`.
+- O projeto antigo que foi iniciado no Eclipse (como erros), está com a numeração normal a partir do `3`, no fim do Readme.
 
 
 ### 3.1 - Configuração do Tomcat no Netbeans
@@ -212,9 +212,31 @@ import java.sql.SQLException;
 	- Em cima da pasta "js" > BT DT > New > JavaScript File
 	- Criar um script com uma função simples `validar()` para validar os campos se estão preenchidos.
 - Adicionar o script antes do fecho da tag `</body>` e chamar a função `onclick="validar()"` dentro do botão `adicionar`.
-- Nota: podemos utilizar o JQuery para fazer validações mais avançadas.
-- Teste "OK" até aqui.
-- ponto 3
+- Teste "OK" até aqui. Passos feitos: 1 a 3.
+
+
+### 10.1 - Controller - Ação Insert no doGet
+2024-07-21
+- Dentro da página `novo.html` no nosso formulário, adicionamos a action `insert` dentro do formulário `frmContato`.
+- Vamos adicionar mais uma rota dentro da nossa classe `Controller` no  `urlPatterns` a rota `/insert`, ficando assim:
+	- `@WebServlet(name = "Controller", urlPatterns = {"/Controller", "/main", "/insert"})`
+- Dentro do Método `doGet`, adicionamos mais uma condição para fazer a rota para o `insert` apontar para o novo método `novoContato(request, response)` que iremos criar.
+- Agora criamos o método  `novoContato(request, response)` e um pequeno código para testar se recebemos os dados:
+``` java
+ // teste de recebimento dos dados do formulário
+    System.out.println(request.getParameter("nome"));
+    System.out.println(request.getParameter("telefone"));
+    System.out.println(request.getParameter("email"));
+```
+- Dados apresentados com sucesso!
+- Feitos os testes, ainda na classe `Controller`, criamos um objeto que aponta para a classe `JavaBeans` para termos acesso aos métodos `set` e armazenar os dados nas variáveis encapsuladas.
+``` java
+// Armazenar na variáveis JavaBeans
+    contato.setNome(request.getParameter("nome"));
+    contato.setTelefone(request.getParameter("telefone"));
+    contato.setEmail(request.getParameter("email"));
+```
+- Mais um teste, retornou tudo sem erros, já podemos apagar o nosso código de teste e manter o último.
 
 
 

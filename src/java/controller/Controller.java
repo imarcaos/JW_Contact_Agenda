@@ -8,15 +8,17 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import model.DAO;
+import model.JavaBeans;
 
 /**
  *
  * @author Marcos Melo
  */
-@WebServlet(name = "Controller", urlPatterns = {"/Controller", "/main"})
+@WebServlet(name = "Controller", urlPatterns = {"/Controller", "/main", "/insert"})
 public class Controller extends HttpServlet {
 
     DAO dao = new DAO();
+    JavaBeans contato = new JavaBeans();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -31,6 +33,10 @@ public class Controller extends HttpServlet {
         String action = request.getServletPath();
         if (action.equals("/main")) {
             contatos(request, response);
+        } else if (action.equals("/insert")) {
+            novoContato(request, response);
+        } else {
+            response.sendRedirect("index.html");
         }
 
 //        // teste de conexão
@@ -41,6 +47,19 @@ public class Controller extends HttpServlet {
     protected void contatos(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.sendRedirect("agenda.jsp");
+    }
+    
+    // Novo Contato
+    protected void novoContato(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        // teste de recebimento dos dados do formulário
+        System.out.println(request.getParameter("nome"));
+        System.out.println(request.getParameter("telefone"));
+        System.out.println(request.getParameter("email"));
+        // Armazenar na variáveis JavaBeans
+        contato.setNome(request.getParameter("nome"));
+        contato.setTelefone(request.getParameter("telefone"));
+        contato.setEmail(request.getParameter("email"));
     }
 
     @Override
