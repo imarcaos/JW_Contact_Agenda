@@ -3,6 +3,7 @@ package model;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.PreparedStatement;
 
 /**
  *
@@ -13,7 +14,7 @@ public class DAO {
     /* Módulo de Conexão */
  /* Parâmetros de Conexão */
     private String driver = "com.mysql.cj.jdbc.Driver";
-    private String url = "jdbc:mysql://localhost/contact_javap1";
+    private String url = "jdbc:mysql://localhost/dbagenda";
     private String user = "root";
     private String pass = "";
 
@@ -31,6 +32,34 @@ public class DAO {
         }
     }
 
+    /* CRUD CREATE */
+    public void inserirContato(JavaBeans contato) {
+        PreparedStatement ps;
+        try {
+            String create = "INSERT INTO contatos (nome, telefone, email) VALUES (?, ? ,?)";
+            // abrir a conexão
+            Connection con = conexao();
+
+            // preparar a query para execução no BD
+            ps = con.prepareStatement(create);
+
+            // adicionar os parâmetros (?)
+            ps.setString(1, contato.getNome());
+            ps.setString(2, contato.getTelefone());
+            ps.setString(3, contato.getEmail());
+
+            // executar a query
+            ps.executeUpdate();
+
+            // fechar a conexão com a BD
+            con.close();
+
+        } catch (SQLException e) {
+            System.out.println("Erro ao Inserir Dados: " + e);
+        }
+
+    }
+
 //    // teste de conexão - para ser removido
 //    public void testeConexao() {
 //        try {
@@ -42,5 +71,4 @@ public class DAO {
 //            System.out.println("Erro Teste de Conexão: " + e);
 //        }
 //    }
-
 }

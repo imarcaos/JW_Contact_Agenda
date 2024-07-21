@@ -23,6 +23,7 @@ Iniciado: 2024-07-16
 
 ### Abreviaturas:
 - BT DT (Botão Direito do Rato/Mouse)
+- BD (Base de Dados)
 
 ### 1 - Criando a BD no MySQL
 - Adicionar uma nova folha de SQL Queries e aplicar os comandos a seguir:
@@ -236,7 +237,16 @@ import java.sql.SQLException;
     contato.setTelefone(request.getParameter("telefone"));
     contato.setEmail(request.getParameter("email"));
 ```
-- Mais um teste, retornou tudo sem erros, já podemos apagar o nosso código de teste e manter o último.
+- Mais um teste, retornou tudo sem erros, já podemos apagar o nosso código de teste e manter o último. Foram feitos os passos 4 e 5.
+
+
+### 11.1 - Model - SQL Create
+2024-07-21
+- Na nossa model `DAO.java` vamos criar um novo método `inserirContato(JavaBeans contato)` e adicionar o comandos necessários para buscar e inserir os dados na nossa BD.
+- Dentro do nosso `Controller.java`, no método `novoContato` aproveitamos o objeto `contato` criado anteriormente e enviamos para a model `DAO.java` chamando o método `dao.inserirContato(contato);`.
+- Ainda dentro do método `novoContato`, depois de inserir o "contato" redirecionamos para a página `agenda.jsp` com o código `response.sendRedirect("main");`.
+- Teste feito, dados inseridos com sucesso na nossa BD `dbagenda`. Passos feitos: 6 a 10.
+
 
 
 

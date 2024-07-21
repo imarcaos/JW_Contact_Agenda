@@ -52,14 +52,21 @@ public class Controller extends HttpServlet {
     // Novo Contato
     protected void novoContato(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // teste de recebimento dos dados do formulário
-        System.out.println(request.getParameter("nome"));
-        System.out.println(request.getParameter("telefone"));
-        System.out.println(request.getParameter("email"));
+//        // teste de recebimento dos dados do formulário
+//        System.out.println(request.getParameter("nome"));
+//        System.out.println(request.getParameter("telefone"));
+//        System.out.println(request.getParameter("email"));
+        
         // Armazenar na variáveis JavaBeans
         contato.setNome(request.getParameter("nome"));
         contato.setTelefone(request.getParameter("telefone"));
         contato.setEmail(request.getParameter("email"));
+        
+        //Invocar o método inserirContato passando o objeto contato
+        dao.inserirContato(contato);
+        
+        // redirecionar para o documento agenda.jsp
+        response.sendRedirect("main");
     }
 
     @Override
