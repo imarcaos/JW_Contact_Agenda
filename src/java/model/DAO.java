@@ -1,9 +1,12 @@
 package model;
 
+import java.sql.ResultSet;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -58,6 +61,36 @@ public class DAO {
             System.out.println("Erro ao Inserir Dados: " + e);
         }
 
+    }
+
+    /* CRUD READ */
+    public ArrayList<JavaBeans> listarContatos() {
+        // Objeto do tipo ArrayList para acessar a classe JavaBeans
+        ArrayList<JavaBeans> contatos = new ArrayList<>();
+
+        String read = "select * from contatos order by nome";
+        try {
+            Connection con = conexao();
+            PreparedStatement ps = con.prepareStatement(read);
+            ResultSet rs = ps.executeQuery();
+
+            // Listar todos os contatos do array
+            while (rs.next()) {
+                // variáveis temporárias para receber os dados da BD
+                String idcon = rs.getString(1);
+                String nome = rs.getString(2);
+                String telefone = rs.getString(3);
+                String email = rs.getString(4);
+
+                // Vamos puxar os dados para o nosso arraylist
+                contatos.add(new JavaBeans(idcon, nome, telefone, email));
+            }
+            con.close();
+            return contatos;
+        } catch (SQLException e) {
+            System.out.println("Erro ao Listar Dados: " + e);
+            return null;
+        }
     }
 
 //    // teste de conexão - para ser removido

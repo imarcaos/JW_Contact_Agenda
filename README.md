@@ -248,7 +248,23 @@ import java.sql.SQLException;
 - Teste feito, dados inseridos com sucesso na nossa BD `dbagenda`. Passos feitos: 6 a 10.
 
 
-
+### 12.1 - Listar Contatos - ArrayList
+2024-07-22
+- Na classe `DAO.java` vamos criar um método responsável pela listagem de dados:
+	- `public ArrayList<JavaBeans> listarContatos()`
+- Na classe `Controller.java` dentro do método `contatos` vamos adicionar um objeto `lista` para receber o resultado da consulta na DB.
+- Novamente na classe `DAO.java` já podemos buscar os dados do método `contatos` na classe `Controller.java`, armazenando em nossa array list no método `listarContatos()`.
+- Dentro da classe `controller.java` adicionamos um loop `for` para listar os para verificar se está tudo a funcionar.
+``` java
+ // teste de recebimento da lista
+for (int i = 0; i < lista.size(); i++) {
+    System.out.println(lista.get(i).getIdcon());
+    System.out.println(lista.get(i).getNome());
+    System.out.println(lista.get(i).getTelefone());
+    System.out.println(lista.get(i).getEmail());
+}
+```
+- Rodar nossa aplicação para testar, correu tudo perfeitamente.
 
 
 
