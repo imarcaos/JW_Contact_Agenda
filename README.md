@@ -265,6 +265,11 @@ for (int i = 0; i < lista.size(); i++) {
 }
 ```
 - Rodar nossa aplicação para testar, correu tudo perfeitamente.
+2024-07-28
+- Encaminhar o objeto lista criado dentro do método `contatos` na classe `Controller.java` para o documento (página) `agenda.jsp`.
+- No nosso documento `agenda.jsp` vamos configurar para apresentar a lista de contatos obtidas.
+	- Fazemos um pequeno código de teste para verificar se conseguimos obter os dados. (código idêntico ao anterior)
+- Melhorar o estilo do formulário de listagem dos contatos na página `agenda.jsp`.
 
 
 

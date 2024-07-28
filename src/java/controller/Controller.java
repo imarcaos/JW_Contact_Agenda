@@ -1,5 +1,6 @@
 package controller;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -48,14 +49,19 @@ public class Controller extends HttpServlet {
             throws ServletException, IOException {
         // Criando um objeto que irá receber os dados JavaBeans
         ArrayList<JavaBeans> lista = dao.listarContatos();
+        
+        // Encaminhar a lista ao documento agenda.jsp
+        request.setAttribute("contatos", lista);
+        RequestDispatcher rd = request.getRequestDispatcher("agenda.jsp");
+        rd.forward(request, response);
 
-        // teste de recebimento da lista
-        for (int i = 0; i < lista.size(); i++) {
-            System.out.println(lista.get(i).getIdcon());
-            System.out.println(lista.get(i).getNome());
-            System.out.println(lista.get(i).getTelefone());
-            System.out.println(lista.get(i).getEmail());
-        }
+//        // teste de recebimento da lista - apagar
+//        for (int i = 0; i < lista.size(); i++) {
+//            System.out.println(lista.get(i).getIdcon());
+//            System.out.println(lista.get(i).getNome());
+//            System.out.println(lista.get(i).getTelefone());
+//            System.out.println(lista.get(i).getEmail());
+//        }
     }
 
     // Novo Contato
