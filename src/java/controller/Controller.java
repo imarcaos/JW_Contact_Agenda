@@ -15,7 +15,7 @@ import model.JavaBeans;
  *
  * @author Marcos Melo
  */
-@WebServlet(name = "Controller", urlPatterns = {"/Controller", "/main", "/insert"})
+@WebServlet(name = "Controller", urlPatterns = {"/Controller", "/main", "/insert", "/select"})
 public class Controller extends HttpServlet {
 
     DAO dao = new DAO();
@@ -32,10 +32,13 @@ public class Controller extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
         String action = request.getServletPath();
+        System.out.println(action);
         if (action.equals("/main")) {
             contatos(request, response);
         } else if (action.equals("/insert")) {
             novoContato(request, response);
+        } else if (action.equals("/select")) {
+            listarContato(request, response);
         } else {
             response.sendRedirect("index.html");
         }
@@ -82,6 +85,17 @@ public class Controller extends HttpServlet {
 
         // redirecionar para o documento agenda.jsp
         response.sendRedirect("main");
+    }
+    
+    // Editar Contato
+    protected void listarContato(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        // Recebe o id do contato que será editado
+        String idcon = request.getParameter("idcon");
+        //System.out.println(idcon); // teste
+        
+        // Configurar a variável JavaBeans
+        contato.setIdcon(idcon);
     }
 
     @Override

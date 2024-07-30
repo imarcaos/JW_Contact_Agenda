@@ -272,7 +272,25 @@ for (int i = 0; i < lista.size(); i++) {
 - Melhorar o estilo do formulário de listagem dos contatos na página `agenda.jsp`.
 
 
-
+### 13.1 - Editar Contatos - CRUD Update
+2024-07-30
+- Dentro da página `agenda.jsp`, adicionar um botão `Editar` na tabela de listagem de contatos, com uma ligação para uma requisição ao servlet com o nome `select`.
+- Na nossa classe `Controller.java`, vamos adicionar o caminho `/select` dentro da nossa servlet no `@WebServlet`, ficando assim:
+	- `@WebServlet(name = "Controller", urlPatterns = {"/Controller", "/main", "/insert", "/select"})`.
+- Ainda na classe `Controller.java`, adicionamos mais um `else if` para chamar o método que iremos criar`listarContato` quando solicitada a requisição `select`.
+- Depois de criado o método `listarContato` (deixar o método vazio) , fazemos um teste, executando a nossa aplicação, ao clicar no botão `Editar` deverá aparecer a impressão `/select` na consola do Netbeans.
+- Dentro da `agenda.jsp`, na ligação do nosso botão editar, adicionamos o código que irá buscar o id do contato, passando como parâmetro para o nosso novo método na classe `Controller.java`: 
+	- `select?idcon=<%=lista.get(i).getIdcon()%>`
+- Na classe `Controller.java` adicionamos dentro do nosso método um código para requisitar o id do contato e fazemos um teste até este ponto para verificar se está tudo bem.
+	- Código do método até aqui:
+``` java
+// Recebe o id do contato que será editado
+String idcon = request.getParameter("idcon");
+System.out.println(idcon); // teste
+```
+- Teste OK.
+- Configurar a variável para o `JavaBeans.java`, código:  `contato.setIdcon(idcon);`
+- Parte 1/4.
 
 
 
