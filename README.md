@@ -292,6 +292,26 @@ System.out.println(idcon); // teste
 - Configurar a variável para o `JavaBeans.java`, código:  `contato.setIdcon(idcon);`
 - Parte 1/4.
 
+2024-07-31
+- Na classe `DAO.java`, vamos adicionar 2 novos métodos para podermos fazer o update do contato:
+	- `public void selecionarContato(JavaBeans contato)`
+	- 
+- Na classe `Controller.java` dentro do método `listaContato` chamamos o nosso novo método passando os dados recebidos por parâmetros `dao.selecionarContato(contato);`
+- Depois de construir o código do nosso método `selecionarContato`, dentro da classe `Controller.java` no método `listarContato` adicionamos uma código para fazermos mais um teste se obtemos os dados do contato selecionado, código do teste:
+``` java
+// teste de recebimento
+System.out.println(contato.getIdcon());
+System.out.println(contato.getNome());
+System.out.println(contato.getTelefone());
+System.out.println(contato.getEmail());
+```
+- teste OK
+- Parte 2/4.
+
+
+
+
+
 
 
 

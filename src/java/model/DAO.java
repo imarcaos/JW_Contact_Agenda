@@ -93,6 +93,27 @@ public class DAO {
         }
     }
     
+    /* CRUD UPDATE */
+    // Selecionar o contato
+    public void selecionarContato(JavaBeans contato) {
+        String read2 = "select * from contatos where idcon = ?";
+        try {
+            Connection con = conexao();
+            PreparedStatement ps = con.prepareStatement(read2);
+            ps.setString(1, contato.getIdcon());
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                // configurar as variáveis JavaBeans
+                contato.setIdcon(rs.getString(1));
+                contato.setNome(rs.getString(2));
+                contato.setTelefone(rs.getString(3));
+                contato.setEmail(rs.getString(4));
+            }
+            con.close();
+        } catch (Exception e) {
+            System.out.println("Erro ao Selecionar Contato Update " + e);
+        }
+    }
 
 //    // teste de conexão - para ser removido
 //    public void testeConexao() {
