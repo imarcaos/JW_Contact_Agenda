@@ -331,6 +331,33 @@ rd.forward(request, response);
 - testar -> OK
 - parte 3/4
 
+#### Editando um Contato - Update do Contato
+2024-08-01
+- Na página `editar.jsp` adicionamos uma nome`update` para a ação do nosso formulário:
+	- `<form name="frmContato" action="update">`
+- Na nossa classe `Controller.java` vamos adicionar a rota `/update` dentro do servlet `@WebServlet` para receber nossa requisição:
+	- `@WebServlet(name = "Controller", urlPatterns = {"/Controller", "/main", "/insert", "/select", "/update"})`
+- O processo é o mesmo dos anteiros, adicionar dentro do método `doGet`, mais um if para direcionar para o método que iremos criar `editarContato`:
+``` java
+} else if (action.equals("/update")) {
+            editarContato(request, response);
+```
+- Agora criamos o método `editarContato` e adicionamos o nosso código de teste (igual aos anteriores) e testamos. (teste -> OK)
+- Adicionamos o código para configurar nossas variáveis no `JavaBeans`
+``` java
+contato.setIdcon(request.getParameter("idcon"));
+contato.setNome(request.getParameter("nome"));
+contato.setTelefone(request.getParameter("telefone"));
+contato.setEmail(request.getParameter("email"));
+```
+- Ainda na classe `Controller.java` chamamos o método `alterarContato` que iremos criar na classe `DAO.java` (pode ser criado já e depois voltar aqui para chamar o método):
+	- `dao.alterarContato(contato);`
+- Na classe `DAO.java` criamos o método ` alterarContato`, criamos o código para a conexão com a BD e enviamos as informações atualizadas.
+- Na classe `Controller.java` dentro do método `editarContato` fazemos o redirecionamento para a página main com as atualizações feitas.
+	- `response.sendRedirect("main");`
+- Fazemos um teste -> OK
+- parte 4/4.
+
 
 
 

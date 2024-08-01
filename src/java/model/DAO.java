@@ -114,6 +114,23 @@ public class DAO {
             System.out.println("Erro ao Selecionar Contato Update " + e);
         }
     }
+    
+    // Editar o Contato
+    public void alterarContato(JavaBeans contato) {
+        String create = "update contatos set nome=?,telefone=?,email=? where idcon=?";
+        try {
+            Connection con = conexao();
+            PreparedStatement ps = con.prepareStatement(create);
+            ps.setString(1, contato.getNome());
+            ps.setString(2, contato.getTelefone());
+            ps.setString(3, contato.getEmail());
+            ps.setString(4, contato.getIdcon());
+            ps.executeUpdate();
+            con.close();
+        } catch (Exception e) {
+            System.out.println("Erro ao atualizar contato: " + e);
+        }
+    }
 
 //    // teste de conexão - para ser removido
 //    public void testeConexao() {

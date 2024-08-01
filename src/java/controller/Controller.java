@@ -15,7 +15,7 @@ import model.JavaBeans;
  *
  * @author Marcos Melo
  */
-@WebServlet(name = "Controller", urlPatterns = {"/Controller", "/main", "/insert", "/select"})
+@WebServlet(name = "Controller", urlPatterns = {"/Controller", "/main", "/insert", "/select", "/update"})
 public class Controller extends HttpServlet {
 
     DAO dao = new DAO();
@@ -39,6 +39,8 @@ public class Controller extends HttpServlet {
             novoContato(request, response);
         } else if (action.equals("/select")) {
             listarContato(request, response);
+        } else if (action.equals("/update")) {
+            editarContato(request, response);
         } else {
             response.sendRedirect("index.html");
         }
@@ -116,6 +118,25 @@ public class Controller extends HttpServlet {
 //        System.out.println(contato.getTelefone());
 //        System.out.println(contato.getEmail());
         
+    }
+    
+    // Atualizar Contato
+    protected void editarContato(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        // Configurar as variáveis JavaBeans
+        contato.setIdcon(request.getParameter("idcon"));
+        contato.setNome(request.getParameter("nome"));
+        contato.setTelefone(request.getParameter("telefone"));
+        contato.setEmail(request.getParameter("email"));
+        dao.alterarContato(contato);
+        
+        // redirecionar para o documento agenda.jsp (com as atualizações feitas)
+        response.sendRedirect("main");
+//        // teste de recebimento dos dados do formulário
+//        System.out.println(request.getParameter("idcon"));
+//        System.out.println(request.getParameter("nome"));
+//        System.out.println(request.getParameter("telefone"));
+//        System.out.println(request.getParameter("email"));
     }
 
     @Override
