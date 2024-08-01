@@ -100,6 +100,16 @@ public class Controller extends HttpServlet {
         //Executar o método selecionarContato (DAO)
         dao.selecionarContato(contato);
         
+        // Configurar os atributos do formulário com o conteúdo do JavaBeans
+        request.setAttribute("idcon", contato.getIdcon());
+        request.setAttribute("nome", contato.getNome());
+        request.setAttribute("telefone", contato.getTelefone());
+        request.setAttribute("email", contato.getEmail());
+        
+        // Encaminhar para o documento editar.jsp
+        RequestDispatcher rd = request.getRequestDispatcher("editar.jsp");
+        rd.forward(request, response);
+        
 //        // teste de recebimento
 //        System.out.println(contato.getIdcon());
 //        System.out.println(contato.getNome());

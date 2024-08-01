@@ -273,6 +273,8 @@ for (int i = 0; i < lista.size(); i++) {
 
 
 ### 13.1 - Editar Contatos - CRUD Update
+
+#### Editando um Contato - Botão e Requisição
 2024-07-30
 - Dentro da página `agenda.jsp`, adicionar um botão `Editar` na tabela de listagem de contatos, com uma ligação para uma requisição ao servlet com o nome `select`.
 - Na nossa classe `Controller.java`, vamos adicionar o caminho `/select` dentro da nossa servlet no `@WebServlet`, ficando assim:
@@ -292,11 +294,12 @@ System.out.println(idcon); // teste
 - Configurar a variável para o `JavaBeans.java`, código:  `contato.setIdcon(idcon);`
 - Parte 1/4.
 
+#### Editando um Contato - Pesquisar o Contato
 2024-07-31
 - Na classe `DAO.java`, vamos adicionar 2 novos métodos para podermos fazer o update do contato:
 	- `public void selecionarContato(JavaBeans contato)`
 	- 
-- Na classe `Controller.java` dentro do método `listaContato` chamamos o nosso novo método passando os dados recebidos por parâmetros `dao.selecionarContato(contato);`
+- Na classe `Controller.java` dentro do método `listarContato` chamamos o nosso novo método passando os dados recebidos por parâmetros `dao.selecionarContato(contato);`
 - Depois de construir o código do nosso método `selecionarContato`, dentro da classe `Controller.java` no método `listarContato` adicionamos uma código para fazermos mais um teste se obtemos os dados do contato selecionado, código do teste:
 ``` java
 // teste de recebimento
@@ -308,6 +311,25 @@ System.out.println(contato.getEmail());
 - teste OK
 - Parte 2/4.
 
+#### Editando um Contato - Formulário para Editar
+2024-08-01
+- Criar uma página `jsp` para criar um formulário e editar nosso contato:
+	- BT DT em cima de "Web Pages" > New... > JSP > Nome: `editar.jsp` > Finish
+	- Podemos aproveitar o código do formulário da página `novo.html` e alterar algumas partes.
+- Na classe `Controller.java` , dentro do método `listarContato` , configuramos os atributos recebidos do formulário para o conteúdo do JavaBeans.
+``` java
+request.setAttribute("idcon", contato.getIdcon());
+request.setAttribute("nome", contato.getNome());
+request.setAttribute("telefone", contato.getTelefone());
+request.setAttribute("email", contato.getEmail());
+```
+- Encaminhar as informações para a página `editar.jsp`.
+``` java
+RequestDispatcher rd = request.getRequestDispatcher("editar.jsp");
+rd.forward(request, response);
+```
+- testar -> OK
+- parte 3/4
 
 
 
