@@ -358,6 +358,30 @@ contato.setEmail(request.getParameter("email"));
 - Fazemos um teste -> OK
 - parte 4/4.
 
+### 14.1 Apagar Contato - CRUD Delete
+2024-08-03
+- Na página `agenda.jsp` vamos adicionar um botão "Apagar" ao lado do "Editar" e estilizar a cor do botão para vermelho.
+- Na pasta "js" dentro da pasta "assets", adicionar um novo ficheiro com o nome: `confirmador.js`
+	- Em cima da pasta "js" > BT DT > New > JavaScript File - Nome: `confirmador.js` > Finish.
+	- Criar um código com uma função simples `confirmar()` para pedir confirmação da exclusão do contato.
+	- Em um primeiro momento adicionamos um código para abrir a caixa de diálogo com o id do contato a excluir:
+		- `alert(idcon)`
+- Na página `agenda.jsp`, antes do fecho da tag `</body>` , adicionar a tag para chamar o script que acabamos de criar:
+	- `<script type="text/javascript" src="assets/js/confirmador.js"></script>`
+-  Na ligação do nosso botão "Apagar", adicionamos o código para chamar a função `confirmar(idcon)`:
+	- `<a href="javascript: confirmar(<%=lista.get(i).getIdcon()%>)" class="btn2">Apagar</a>`
+- Fazemos um teste para ver se retorna o id do contato que queremos excluir, a seguir ao teste vamos terminar o código da função `confirmar(idcon)`:
+	- `window.location.href = 'delete?idcon=' + idcon`
+-  Na nossa classe `Controller` vamos adicionar a rota `/delete` dentro do servlet `@WebServlet` para receber nossa requisição:
+	- `@WebServlet(name = "Controller", urlPatterns = {"/Controller", "/main", "/insert", "/select", "/update", "/delete"})`
+- O processo é o mesmo dos anteriores, fazemos um teste de encaminhamento da rota, a seguir adicionar dentro do método `doGet`, mais um if para direcionar para o método que iremos criar `apagarContato`.
+- Agora vamos criar o método `apagarContato` e adicionamos o código para fazer um teste para ver se o id do contato estar a chegar ao método.
+- Na classe `DAO` adicionamos o método `eliminarContato` e já logo voltamos para escrever o restante do código.
+- Novamente na classe `Controller`, dentro do método `apagarContato` vamos chamar e executar o método que acabamos de criar na classe `DAO`:
+	- `dao.eliminarContato(contato);`
+- Retornando ao nosso método `eliminarContato` na classe `DAO`, vamos escrever o código no nosso método.
+ - Na classe `Controller`, dentro do método `apagarContato`, fazemos o redirecionamento para a `main` (`agenda.jsp`) atualizando as alterações. 
+
 
 
 

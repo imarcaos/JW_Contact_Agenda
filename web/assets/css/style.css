@@ -33,6 +33,18 @@ img {
     cursor: pointer;
 }
 
+.btn2 {
+    text-decoration: none;
+    background-color: #d51213;
+    padding: 5px 10px 5px 10px;
+    color: #fff;
+    font-size: 1.2em;
+    font-weight: 600;
+    border: 0;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
 .cx1 {
     width: 320px;
     padding: 5px;

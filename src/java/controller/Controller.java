@@ -15,7 +15,7 @@ import model.JavaBeans;
  *
  * @author Marcos Melo
  */
-@WebServlet(name = "Controller", urlPatterns = {"/Controller", "/main", "/insert", "/select", "/update"})
+@WebServlet(name = "Controller", urlPatterns = {"/Controller", "/main", "/insert", "/select", "/update", "/delete"})
 public class Controller extends HttpServlet {
 
     DAO dao = new DAO();
@@ -41,6 +41,8 @@ public class Controller extends HttpServlet {
             listarContato(request, response);
         } else if (action.equals("/update")) {
             editarContato(request, response);
+        } else if (action.equals("/delete")) {
+            apagarContato(request, response);
         } else {
             response.sendRedirect("index.html");
         }
@@ -54,7 +56,7 @@ public class Controller extends HttpServlet {
             throws ServletException, IOException {
         // Criando um objeto que irá receber os dados JavaBeans
         ArrayList<JavaBeans> lista = dao.listarContatos();
-        
+
         // Encaminhar a lista ao documento agenda.jsp
         request.setAttribute("contatos", lista);
         RequestDispatcher rd = request.getRequestDispatcher("agenda.jsp");
@@ -88,38 +90,37 @@ public class Controller extends HttpServlet {
         // redirecionar para o documento agenda.jsp
         response.sendRedirect("main");
     }
-    
+
     // Editar Contato
     protected void listarContato(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // Recebe o id do contato que será editado
         String idcon = request.getParameter("idcon");
         //System.out.println(idcon); // teste
-        
+
         // Configurar a variável JavaBeans
         contato.setIdcon(idcon);
-        
+
         //Executar o método selecionarContato (DAO)
         dao.selecionarContato(contato);
-        
+
         // Configurar os atributos do formulário com o conteúdo do JavaBeans
         request.setAttribute("idcon", contato.getIdcon());
         request.setAttribute("nome", contato.getNome());
         request.setAttribute("telefone", contato.getTelefone());
         request.setAttribute("email", contato.getEmail());
-        
+
         // Encaminhar para o documento editar.jsp
         RequestDispatcher rd = request.getRequestDispatcher("editar.jsp");
         rd.forward(request, response);
-        
+
 //        // teste de recebimento
 //        System.out.println(contato.getIdcon());
 //        System.out.println(contato.getNome());
 //        System.out.println(contato.getTelefone());
 //        System.out.println(contato.getEmail());
-        
     }
-    
+
     // Atualizar Contato
     protected void editarContato(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -129,7 +130,7 @@ public class Controller extends HttpServlet {
         contato.setTelefone(request.getParameter("telefone"));
         contato.setEmail(request.getParameter("email"));
         dao.alterarContato(contato);
-        
+
         // redirecionar para o documento agenda.jsp (com as atualizações feitas)
         response.sendRedirect("main");
 //        // teste de recebimento dos dados do formulário
@@ -137,6 +138,24 @@ public class Controller extends HttpServlet {
 //        System.out.println(request.getParameter("nome"));
 //        System.out.println(request.getParameter("telefone"));
 //        System.out.println(request.getParameter("email"));
+    }
+    
+    // Apagar Contato
+    protected void apagarContato(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        // Recebe o id do contato que será elimidado (validador.js)
+        String idcon = request.getParameter("idcon");
+        //System.out.println(idcon); // teste
+        
+        // Configurar a variável idcon JavaBeans
+        contato.setIdcon(idcon);
+
+        //Executar o método eliminarContato (DAO)
+        dao.eliminarContato(contato);
+        
+        // redirecionar para o documento agenda.jsp (com as atualizações feitas)
+        response.sendRedirect("main");
+
     }
 
     @Override

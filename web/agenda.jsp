@@ -44,10 +44,14 @@
                     <td><%=lista.get(i).getNome()%></td>
                     <td><%=lista.get(i).getTelefone()%></td>
                     <td><%=lista.get(i).getEmail()%></td>
-                    <td><a href="select?idcon=<%=lista.get(i).getIdcon()%>" class="btn1">Editar</a></td>
+                    <td>
+                        <a href="select?idcon=<%=lista.get(i).getIdcon()%>" class="btn1">Editar</a>
+                        <a href="javascript: confirmar(<%=lista.get(i).getIdcon()%>)" class="btn2">Apagar</a>
+                    </td>
                 </tr>                
                 <% } %>                
             </tbody>            
         </table>
+        <script type="text/javascript" src="assets/js/confirmador.js"></script>
     </body>
 </html>

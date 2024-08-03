@@ -131,6 +131,21 @@ public class DAO {
             System.out.println("Erro ao atualizar contato: " + e);
         }
     }
+    
+    /* CRUD DELETE */
+    // Eliminar um contato
+    public void eliminarContato(JavaBeans contato) {
+        String delete = "delete from contatos where idcon = ?";
+        try {
+            Connection con = conexao();
+            PreparedStatement ps = con.prepareStatement(delete);
+            ps.setString(1, contato.getIdcon());
+            ps.executeUpdate();
+            con.close();
+        } catch (SQLException e) {
+            System.out.println("Erro ao Eliminar o Contato: " + e);
+        }
+    }
 
 //    // teste de conexão - para ser removido
 //    public void testeConexao() {
