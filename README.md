@@ -7,7 +7,15 @@ Projeto Java Web Servlet - JSP - JDBC - MySQL - MVC - Eclipse IDE
 ## Projeto 2 - Java Web - Agenda de Contacto
 Iniciado: 2024-07-16
 
+#### Janela de Operações do Contato
+![Operações da Agenda de Contato](./other_files/java_proj2-contatos.png)
+
+#### Print da impressão do PDF
+![PDF Gerado](./other_files/java_proj2-contatos-pdf.png)
+
+
 ### Logs
+- 2024-08-05 - Projeto finalizado
 - 2024-07-20 - Criado uma nova "branch eclipse_proj", o projeto feito no Eclipse, estará armazenado nesta "branch".
 - 2024-07-20 - Vou tentar converter o projeto do Eclipse para o Netbeans ( Ponto 3 Eclipse -> ponto 3.1 NetBeans)
 - 2024-07-20 - Cheio de Erros com o Eclipse que não consigo resolver `@WebServlet`, acredito ser por não estar a seguir o projeto original com JDK 11 e Tomcat9.
@@ -424,7 +432,11 @@ Document documento = new Document();
 - Teste feito, PDF gerado com os contatos.
 
 
-
+### 16.1 Projeto Finalizado
+2024-08-05
+- O código contém comentários e algum código extra que não irei remover a título de estudos, mas em um projeto a ser entregue, deve ser limpo e documentado.
+- Deixo a ligação para o vídeo da aula deste projeto que não é de minha autoria, serviu apenas para meus estudos.
+	- Projeto [Agenda de Contatos](https://youtube.com/playlist?list=PLbEOwbQR9lqz9AnwhrrOLz9cz1-TxoiUg&si=Xd54IpYM6KSkSF3R).
 
 
 
