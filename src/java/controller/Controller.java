@@ -1,5 +1,11 @@
 package controller;
 
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -15,7 +21,7 @@ import model.JavaBeans;
  *
  * @author Marcos Melo
  */
-@WebServlet(name = "Controller", urlPatterns = {"/Controller", "/main", "/insert", "/select", "/update", "/delete"})
+@WebServlet(name = "Controller", urlPatterns = {"/Controller", "/main", "/insert", "/select", "/update", "/delete", "/report"})
 public class Controller extends HttpServlet {
 
     DAO dao = new DAO();
@@ -43,6 +49,8 @@ public class Controller extends HttpServlet {
             editarContato(request, response);
         } else if (action.equals("/delete")) {
             apagarContato(request, response);
+        } else if (action.equals("/report")) {
+            gerarRelatorio(request, response);
         } else {
             response.sendRedirect("index.html");
         }
@@ -156,6 +164,51 @@ public class Controller extends HttpServlet {
         // redirecionar para o documento agenda.jsp (com as atualizações feitas)
         response.sendRedirect("main");
 
+    }
+    
+    // Gerar Relatório
+    protected void gerarRelatorio(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        Document documento = new Document();
+        
+        try {
+            // tipo de conteúdo
+            response.setContentType("application/pdf");
+            
+            // nome do documento
+            response.addHeader("Content-Disposition", "inline; filename=" + "contatos.pdf");
+            
+            // criar o documento
+            PdfWriter.getInstance(documento, response.getOutputStream());
+            
+            // abir o documento -> conteúdo
+            documento.open();
+            documento.add(new Paragraph("Lista de Contatos:"));
+            documento.add(new Paragraph(" "));
+            // criar uma tabela
+            PdfPTable tabela = new PdfPTable(3);
+            // cabeçalho
+            PdfPCell col1 = new PdfPCell(new Paragraph(("Nome")));
+            PdfPCell col2 = new PdfPCell(new Paragraph(("Telefone")));
+            PdfPCell col3 = new PdfPCell(new Paragraph(("Email")));
+            tabela.addCell(col1);
+            tabela.addCell(col2);
+            tabela.addCell(col3);
+            // apresentar os contatos na tabela
+            ArrayList<JavaBeans> lista = dao.listarContatos();
+            for (int i=0; i<lista.size(); i++) {
+                tabela.addCell(lista.get(i).getNome());
+                tabela.addCell(lista.get(i).getTelefone());
+                tabela.addCell(lista.get(i).getEmail());
+            }
+            documento.add(tabela); // para testar até este ponto
+            documento.close();
+            
+            
+        } catch (Exception e) {
+            System.out.println("Erro ao Gerar Documento PDF: " + e);
+            documento.close();
+        }
     }
 
     @Override

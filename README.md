@@ -383,6 +383,45 @@ contato.setEmail(request.getParameter("email"));
  - Na classe `Controller`, dentro do método `apagarContato`, fazemos o redirecionamento para a `main` (`agenda.jsp`) atualizando as alterações. 
 
 
+### 15.1 Criar Relatórios em PDF com itexpdf
+2024-08-05
+- Para trabalhar com a biblioteca itexpdf, precisamos fazer o download, fazer a pesquisa por "itextpdf" e escolher a que retorna no Github: https://github.com/itext/itextpdf, rolar a tela abaixo, escolher a última versão `itextpdf-version-x` que aparece core, clicar em cima da ligação e fazer o download (na altura que estou escrevendo esta documentação está nesta versão: `itextpdf-5.5.13.2.zip`).
+	- Fazemos o download do zip para a nossa máquina.
+	- Extraímos para um local reservando para as nossa bibliotecas Java em que não te esqueças.
+	- Dentro do Projeto no Netbeans > Libraries > BT DT > Add Jar/Folder... > navegamos até a pasta onde extraímos os ficheiros e vamos buscar o nosso jar `itextpdf-5.5.13.2.jar` > Open
+	- Já deve aparecer na nossa biblioteca.
+- Na página `agenda.jsp` vamos criar o botão de relatório.
+	- Abaixo do botão `Novo Contacto`, adicionamos o novo botão `Relatório`
+		- `<a href="report" class="btn2">Relatório</a>`
+	- Salvamos tudo e fazemos um teste para verificar.
+- Na classe `Controller` vamos adicionar a nova rota Scriptlet `/report`
+	- `@WebServlet(name = "Controller", urlPatterns = {"/Controller", "/main", "/insert", "/select", "/update", "/delete", "/report"})`
+	- No método `doGet` adicionamos outro `elseif` para receber a requisição apontando para um novo método `gerarRelatorio` que iremos criar.
+	- Ao adicionar o código necessário ele deve importar automaticamente a biblioteca que adicionamos: `import com.itextpdf.text.Document;` (ter atenção no código a outros imports que ele necessita para criarmos os documentos). 
+	- No Netbeans para adicionar bibliotecas podemos usar como atalho o "CTRL+SHIFT+i" ou clicar na lâmpada do lado esquerdo e escolher o import se este for listado, em última situação adicionamos manualmente.
+	- Dentro do método `gerarRelatorio` depois de escrito boa parte do código, fazemos um teste para ver se a rota está a funcionar.
+``` java
+// código do gerarRelatorio até o momento.
+Document documento = new Document();        
+        try {
+            // tipo de conteúdo
+            response.setContentType("application/pdf");            
+            // nome do documento
+            response.addHeader("Content-Disposition", "inline; filename=" + "contatos.pdf");            
+            // criar o documento
+            PdfWriter.getInstance(documento, response.getOutputStream());            
+            // abir o documento -> conteúdo
+            documento.open();
+            documento.add(new Paragraph("Lista de Contatos:"));
+            documento.close();              
+        } catch (Exception e) {
+            System.out.println("Erro ao Gerar Documento PDF: " + e);
+            documento.close();
+        }
+```
+- Até este ponto, se tudo correu bem, ao executar nosso programa e carregar no botão `Relatório` ele deve retornar um PDF apenas com título "Lista de Contatos:"
+- Agora vamos escrever o código para carregar as informações da nossa BD.
+- Teste feito, PDF gerado com os contatos.
 
 
 
